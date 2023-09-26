@@ -29,21 +29,23 @@
         $naamvalidate = $_POST['voornaam'] . $_POST['achternaam'];
         echo $naamcheck; 
         echo $naamvalidate;
-        if ($naamcheck == $naamvalidate) {
-            echo "Correct";
-        } else {
-            echo 'else';
-        }
+        
         $sql2 = "INSERT INTO klanten (voornaam, achternaam, account_id)
-        VALUES (:voornaam,:achternaam, :accountid)";
+        VALUES (:voornaam,:achternaam,:accountid)";
         $stmt2 = $connect->prepare($sql2);
         $stmt2->bindParam(":voornaam", $_POST['voornaam']);
         $stmt2->bindParam(":achternaam", $_POST['achternaam']);
         $stmt2->bindParam(":accountid", $lastInsertedId);
-        $stmt2->execute();
-        $result = $stmt2->fetch();
+        
+        if ($naamcheck == $naamvalidate) {
+            $stmt2->execute();
+            $stmt2->fetch();
+        } else {
+            echo 'else';
+        }
+        // var_dump($_POST['achternaam']);
         echo $lastInsertedId;
-        header("Location: ../login.php");
+        // header("Location: ../login.php");
     } else {
         header("Location: ../register.php");
     }
