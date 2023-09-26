@@ -45,7 +45,7 @@
         }
         // var_dump($_POST['achternaam']);
         echo $lastInsertedId;
-        // header("Location: ../login.php");
+        header("Location: ../login.php");
     } else {
         header("Location: ../register.php");
     }

@@ -1,12 +1,14 @@
 <?php 
 include_once '../layout/session.php';
 ?> <p class="loggedin"> <?php if ($_SESSION['loggedin'] == TRUE ){
-	if ($_SESSION['is_admin'] === 1){
+	if ($_SESSION['positie_id'] === 2){
 		// echo 'Welcome admin, ' . $_SESSION['name'] . '!';
-		header('Location: ./admin.php');
+		header('Location: ./admin/medewerker.php');
+	} elseif ($_SESSION['positie_id'] === 1) {
+
 	} else {
 		// echo 'Welcome user, ' . $_SESSION['name'] . '!';
-		header('Location: ./user.php');
+		header('Location: ./user/user.php');
 	}
 } ?> </p>
 <style>
