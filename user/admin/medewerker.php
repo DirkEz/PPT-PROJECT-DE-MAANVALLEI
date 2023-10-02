@@ -16,7 +16,7 @@ if ($_SESSION['positie_id'] != 1) {
     <title>Document</title>
 </head>
 <body>
-    admin
+    Medewerker
     <a href="../logout.php">Uitloggen</a>
 </body>
 </html>

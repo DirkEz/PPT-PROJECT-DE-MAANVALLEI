@@ -9,5 +9,6 @@
 </head>
 <body>
     user
+    <a href="../logout.php">Uitloggen</a>
 </body>
 </html>
