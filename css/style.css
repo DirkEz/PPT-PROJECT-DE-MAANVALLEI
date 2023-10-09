@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.weekdagen {
+    
+}
+.weekdag {
+    width:250px;
+    height: 600px;
+    /* background-color: aqua; */
+    margin-top: 5px;
+    margin-left: 5px;
+    border-radius: 50px;
+}
+
+.titlebox {
+    background-color: rgb(160, 160, 160);
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.itemsbox {
+    width: 100%;
+    height: 96%;
+    background-color: rgb(226, 226, 226);
+}
