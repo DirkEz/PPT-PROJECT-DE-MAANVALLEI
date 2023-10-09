@@ -8,5 +8,6 @@
 <body>
 <a href="user\login.php">login</a>
     <a href="user\register.php">register</a>
+    <a href="userpage.php">userpage</a>
 </body>
 </html>
