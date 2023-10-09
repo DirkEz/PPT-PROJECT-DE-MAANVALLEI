@@ -1,6 +1,6 @@
 <?php 
 include_once '../../user-creation/config/config.php';
-$stmt = $connect->prepare("SELECT * FROM werknemers_rooster WHERE week = '2'");
+$stmt = $connect->prepare("SELECT wr.*, w.voornaam, w.achternaam FROM werknemers_rooster wr JOIN werknemers w ON wr.werknemer_id = w.id WHERE wr.week = '2'");
 $stmt->execute();
 $roosterData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -30,12 +30,13 @@ $roosterData = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="container itemsbox">
                 <?php if (!empty($currentDayData)) {
                     foreach ($currentDayData as $row) {
-                        ?><div class="item w-90 bg-info">
+                        ?><div class="item mt-1 w-90 bg-info">
                             
                             <?=  $row['id'] ;?> </div> <?php 
                     }
                 } else { 
-                    echo "Er is geen rooster voor deze dag";    
+
+                    echo " Er is geen rooster voor deze dag";    
                 }?>
             </div>
         </div>
