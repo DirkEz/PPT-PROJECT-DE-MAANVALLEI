@@ -31,7 +31,7 @@ if ($stmt = $con->prepare("SELECT id, wachtwoord FROM accounts WHERE email = ?")
         $password = password_verify($_POST['password'], $password_hashed);
         
         if ($password === true ) {
-            debug_to_console("3");
+            // debug_to_console("3");
             session_regenerate_id();
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['name'] = $_POST['email'];
@@ -59,9 +59,9 @@ if ($stmt = $con->prepare("SELECT id, wachtwoord FROM accounts WHERE email = ?")
             }
         } else {
             echo 'Incorrect username and/or password!';
-            echo $password_hashed;
-            echo $password;
-            echo $_POST['password'];
+            // echo $password_hashed;
+            // echo $password;
+            // echo $_POST['password'];
         }
     } else {
         echo 'Incorrect username and/or password!';
