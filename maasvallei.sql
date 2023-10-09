@@ -26,12 +26,13 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `email` varchar(64) NOT NULL,
   `wachtwoord` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table ppt_maasvallei.accounts: ~0 rows (approximately)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
 INSERT INTO `accounts` (`id`, `voornaam`, `achternaam`, `telefoon_nummer`, `email`, `wachtwoord`) VALUES
-	(13, 'Dirk', 'Schaafstra', '0613575700', 'dirk.schaafstra@gmail.com', '$2y$10$.o1XM/59nMj5QlXC6GXMJuOO73NJHy0AftcOnsqdlFoGmHkco0iPy');
+	(13, 'Dirk', 'Schaafstra', '0613575700', 'dirk.schaafstra@gmail.com', '$2y$10$.o1XM/59nMj5QlXC6GXMJuOO73NJHy0AftcOnsqdlFoGmHkco0iPy'),
+	(14, 'Bjoreno', 'Degens', '0611pijpjeze', 'bjorenodegens@gmail.com', '$2y$10$bzmh1MttPs.zqcdqsw5K4.lK5ug3sglw2WbPNn/TuJXl0E4WlwOkO');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 -- Dumping structure for table ppt_maasvallei.dagen
@@ -95,12 +96,13 @@ CREATE TABLE IF NOT EXISTS `klanten` (
   PRIMARY KEY (`id`),
   KEY `account_id` (`account_id`),
   CONSTRAINT `FK__accounts` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table ppt_maasvallei.klanten: ~0 rows (approximately)
 /*!40000 ALTER TABLE `klanten` DISABLE KEYS */;
 INSERT INTO `klanten` (`id`, `voornaam`, `achternaam`, `account_id`) VALUES
-	(12, 'Dirk', 'Schaafstra', 13);
+	(12, 'Dirk', 'Schaafstra', 13),
+	(13, 'Bjoreno', 'Degens', 14);
 /*!40000 ALTER TABLE `klanten` ENABLE KEYS */;
 
 -- Dumping structure for table ppt_maasvallei.nieuws
@@ -223,10 +225,13 @@ CREATE TABLE IF NOT EXISTS `werknemers` (
   KEY `account_id` (`account_id`),
   CONSTRAINT `FK_werknemers_accounts` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `werknemers_ibfk_1` FOREIGN KEY (`positie_id`) REFERENCES `positie` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table ppt_maasvallei.werknemers: ~0 rows (approximately)
+-- Dumping data for table ppt_maasvallei.werknemers: ~2 rows (approximately)
 /*!40000 ALTER TABLE `werknemers` DISABLE KEYS */;
+INSERT INTO `werknemers` (`id`, `username`, `voornaam`, `achternaam`, `positie_id`, `account_id`) VALUES
+	(3, 'DirkEz', 'Dirk', 'Schaafstra', 1, 13),
+	(4, 'Bjoreno', 'Bjoreno', 'Degens', 1, 14);
 /*!40000 ALTER TABLE `werknemers` ENABLE KEYS */;
 
 -- Dumping structure for table ppt_maasvallei.werknemers_rooster
@@ -244,10 +249,15 @@ CREATE TABLE IF NOT EXISTS `werknemers_rooster` (
   CONSTRAINT `FK_werknemers_rooster_dagen` FOREIGN KEY (`dag`) REFERENCES `dagen` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_werknemers_rooster_weken` FOREIGN KEY (`week`) REFERENCES `weken` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `werknemers_rooster_ibfk_1` FOREIGN KEY (`werknemer_id`) REFERENCES `werknemers` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table ppt_maasvallei.werknemers_rooster: ~0 rows (approximately)
+-- Dumping data for table ppt_maasvallei.werknemers_rooster: ~3 rows (approximately)
 /*!40000 ALTER TABLE `werknemers_rooster` DISABLE KEYS */;
+INSERT INTO `werknemers_rooster` (`id`, `werknemer_id`, `begin_tijd`, `eind_tijd`, `dag`, `week`) VALUES
+	(3, 3, '14:41:02', '14:41:03', 1, 2),
+	(4, 3, '14:41:02', '14:41:03', 1, 2),
+	(5, 3, '11:07:20', '11:07:23', 4, 2),
+	(6, NULL, '11:18:45', '11:18:47', 3, 2);
 /*!40000 ALTER TABLE `werknemers_rooster` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
