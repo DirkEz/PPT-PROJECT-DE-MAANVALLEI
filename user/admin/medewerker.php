@@ -17,6 +17,8 @@ if ($_SESSION['positie_id'] != 1) {
 </head>
 <body>
     Medewerker
+    <a href="rooster\week.php">Bekijk het rooster</a>
+
     <a href="../logout.php">Uitloggen</a>
 </body>
 </html>
