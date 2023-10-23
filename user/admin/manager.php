@@ -22,6 +22,6 @@ if (!isset($_SESSION['loggedin'])) {
 <body>
     Manager
     <a href="../logout.php">Uitloggen</a>
-    <a href="/Maasvallei/PPT-PROJECT-DE-MAANVALLEI/user/admin/management\add_werknemer.php">Werknemer toevoegen</a>
+    <a href="/Maasvallei/PPT-PROJECT-DE-MAANVALLEI/user/admin/management\beheer_werknemer.php">Werknemers beheren</a>
 </body>
 </html>

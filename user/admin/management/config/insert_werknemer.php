@@ -1,19 +1,29 @@
 <?php
-if(isset($_POST['submit'])) {
-$sql = "INSERT INTO medewerker (username,voornaam,achternaam,positie_id,account_id)
-VALUES (:username,:voornaam,:achternaam, :positie_id, :account_id)";
+
+include_once "../../../user-creation/config/config.php";
+if(isset($_POST['submit_add'])) {
+$sql = "INSERT INTO werknemers (username,voornaam,achternaam,account_id)
+VALUES (:username,:voornaam,:achternaam, :account_id)";
 $stmt = $connect->prepare($sql);
-$stmt->bindParam(":titel", $_POST['titel']);
-$stmt->bindParam(":prijs", $_POST['prijs']);
-$stmt->bindParam(":beschrijving", $_POST['beschrijving']);
-$stmt->bindParam(":afbeelding", $_POST['afbeelding']);
-$stmt->bindParam(":categorie", $_POST['categorie']);
+$stmt->bindParam(":username", $_POST['username']);
+$stmt->bindParam(":voornaam", $_POST['voornaam']);
+$stmt->bindParam(":achternaam", $_POST['achternaam']);
+$stmt->bindParam(":account_id", $_POST['account_id']);
 $stmt->execute();
 
-header('Location: beveiligdepagina.php');
+header('Location: ../beheer_werknemer.php');
 exit();
+} else
+
+if(isset($_POST['submit_delete'])) {
+    $sql = "DELETE FROM werknemers WHERE id = :id";
+    $stmt = $connect->prepare($sql);
+    $stmt->bindParam(":id", $_POST['id']);
+    $stmt->execute();
+    header('Location: ../beheer_werknemer.php');
+    exit();
 } else {
-header('Location: beveiligdepagina.php');
-exit();
+    header('Location: ../beheer_werknemer.php');
+    exit();
 }
 ?>
