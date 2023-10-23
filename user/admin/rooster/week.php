@@ -1,8 +1,10 @@
 <?php 
-include_once '../../user-creation/config/config.php';
-$stmt = $connect->prepare("SELECT wr.*, w.voornaam, w.achternaam FROM werknemers_rooster wr JOIN werknemers w ON wr.werknemer_id = w.id WHERE wr.week = '2'");
+include_once '../../config/config.php';
+$week = $_GET['week'];
+$stmt = $connect->prepare("SELECT wr.*, w.voornaam, w.achternaam FROM werknemers_rooster wr JOIN werknemers w ON wr.werknemer_id = w.id WHERE wr.week = '$week'");
 $stmt->execute();
 $roosterData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +18,7 @@ $roosterData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </head>
 <body>
     <div class="d-flex weekdagen justify-content-center">
+
         <?php 
         $days = ['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag', 'Zondag'];
         for ($i = 1; $i <= 7; $i++) {
