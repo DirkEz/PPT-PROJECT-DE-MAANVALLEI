@@ -49,6 +49,7 @@ Manager
         </form>
    <?php }endforeach; ?>
 
+
 <h2>Medewerker verwijderen</h2>
 <?php foreach($werknemers_result as $werknemers): {?>
     <form action="config/insert_werknemer.php" method="post">
