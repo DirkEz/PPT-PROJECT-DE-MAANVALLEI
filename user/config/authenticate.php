@@ -33,7 +33,7 @@ if ($stmt = $con->prepare("SELECT id, wachtwoord FROM accounts WHERE email = ?")
         if ($password === true ) {
             // debug_to_console("3");
             session_regenerate_id();
-            $_SESSION['loggedin'] = TRUE;
+
             $_SESSION['name'] = $_POST['email'];
             $_SESSION['id'] = $id;
             
@@ -45,14 +45,17 @@ if ($stmt = $con->prepare("SELECT id, wachtwoord FROM accounts WHERE email = ?")
             
             $_SESSION['positie_id'] = $positie_id;
             if ($_SESSION['positie_id'] === 2){
+                $_SESSION['loggedin'] = TRUE;
                 echo 'Welcome ' . $_SESSION['name'] . '!';
                 debug_to_console("id: " . $id . " TRUE");  
                 header('Location: ../admin/manager.php');
             } elseif ($_SESSION['positie_id'] === 1){
+                $_SESSION['loggedin'] = TRUE;
                 echo 'Welcome ' . $_SESSION['name'] . '!';
                 debug_to_console("id: " . $id . " TRUE");  
                 header('Location: ../admin/medewerker.php');
             } else {
+                $_SESSION['loggedin'] = TRUE;
                 echo 'Welcome ' . $_SESSION['name'] . '!';
                 // debug_to_console("id: " . $id); 
                 header('Location: ../user/user.php');

@@ -2,12 +2,9 @@
 
 include_once "../../layout/session.php";
 
-if (!isset($_SESSION['loggedin'])) {
+if ($_SESSION['loggedin'] == TRUE) {
     if ($_SESSION['positie_id'] != 2) {
-        header('../login.php');
-        exit;
-    } else {
-        echo "hoi!";
+        header('location:../login.php');
     }
 }
 ?>

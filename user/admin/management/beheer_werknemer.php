@@ -4,14 +4,11 @@
 include_once "../../user-creation/config/config.php";
 include_once "../../../layout/session.php";
 
-if (!isset($_SESSION['loggedin'])) {
-        if ($_SESSION['positie_id'] != 2) {
-        header('../login.php');
-        exit;
-    } else {
-        echo "hoi!";
+if ($_SESSION['loggedin'] == TRUE) {
+    if ($_SESSION['positie_id'] != 2) {
+        header('location:../login.php');
     }
-}
+}else header('location:../login.php');
 
 $sql = "SELECT * FROM accounts";
 $stmt = $connect->prepare($sql);

@@ -2,10 +2,11 @@
 
 include_once "../../layout/session.php";
 
-if ($_SESSION['positie_id'] != 1) {
-    header('../login.php');
-}
-
+if ($_SESSION['loggedin'] == TRUE) {
+    if ($_SESSION['positie_id'] != 1) {
+        header('location:../login.php');
+    }
+}else header('location:../login.php');
 ?>
 
 <!DOCTYPE html>
