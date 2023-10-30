@@ -5,7 +5,7 @@ include_once "../user-creation/config/config.php";
 include_once "../../layout/session.php";
 
 if ($_SESSION['loggedin'] == TRUE) {
-    if ($_SESSION['positie_id'] != 2) {
+    if ($_SESSION['positie_id'] != 1 && $_SESSION['positie_id'] != 2 ) {
         header('location:../login.php');
     }
 }else header('location:../login.php');
