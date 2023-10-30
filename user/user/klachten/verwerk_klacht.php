@@ -2,7 +2,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $klant_id = $_POST["klant_id"];
     $titel_klacht = $_POST["titel_klacht"];
-    $klacht = $_POST["klacht"];
+    $bericht = $_POST["bericht"];
 
     // Replace with your actual database credentials
     $host = "localhost";
@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Use prepared statements to insert data
-    $query = $connection->prepare("INSERT INTO klachten (klant_id, titel_klacht, bericht) VALUES (?, ?, ?)");
+    $query = $connection->prepare("INSERT INTO klachten (klant_id, titel_klacht, klacht) VALUES (?, ?, ?");
     
     // Bind parameters
     $query->bind_param("iss", $klant_id, $titel_klacht, $klacht);
