@@ -19,6 +19,7 @@ if ($_SESSION['loggedin'] == TRUE) {
 <body>
     Medewerker
     <a href="rooster\week.php">Bekijk het rooster</a>
+    <a href="kampeerplaatsen_inzien.php">Kampeerplaatsen inzien</a>
 
     <a href="../logout.php">Uitloggen</a>
 </body>

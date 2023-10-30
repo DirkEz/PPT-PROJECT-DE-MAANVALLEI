@@ -20,5 +20,6 @@ if ($_SESSION['loggedin'] == TRUE) {
     Manager
     <a href="../logout.php">Uitloggen</a>
     <a href="/Maasvallei/PPT-PROJECT-DE-MAANVALLEI/user/admin/management\beheer_werknemer.php">Werknemers beheren</a>
+    <a href="kampeerplaatsen_inzien.php">Kampeerplaatsen inzien</a>
 </body>
 </html>
