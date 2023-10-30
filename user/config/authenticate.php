@@ -1,6 +1,6 @@
 <?php 
 include_once 'config.php';
-
+session_start();
 // DEBUG
 function debug_to_console($data) {
     $output = $data;
@@ -35,8 +35,8 @@ if (isset($_POST['email'], $_POST['password'])) {
             $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
             $wid = $row2['id'];
             $positie_id = $row2['positie_id'];
-            $_SESSION['positie_id'] = $positie_id;
-
+            $_SESSION['admin-id'] = $positie_id;
+            echo $_SESSION['admin-id'];
             if ($positie_id === 2) {
                 echo 'Welcome ' . $_SESSION['name'] . '!';
                 debug_to_console("id: " . $id . " TRUE");
