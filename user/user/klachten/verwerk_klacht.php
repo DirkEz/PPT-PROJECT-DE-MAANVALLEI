@@ -1,20 +1,24 @@
 <?php
-include('config.php'); // Include your database configuration
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $klant_id = $_POST["klant_id"];
     $titel_klacht = $_POST["titel_klacht"];
     $klacht = $_POST["klacht"];
 
-    // Create a new MySQLi connection using the included database configuration
-    $connection = new mysqli($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+    // Replace with your actual database credentials
+    $host = "localhost";
+    $username = "root";  // Replace with your database username
+    $password = "";      // Replace with your database password
+    $database = "ppt_maasvallei";
+
+    // Create a new MySQLi connection
+    $connection = new mysqli($host, $username, $password, $database);
 
     if ($connection->connect_error) {
         die("Verbindingsfout: " . $connection->connect_error);
     }
 
     // Use prepared statements to insert data
-    $query = $connection->prepare("INSERT INTO klachten (klant_id, titel_klacht, klacht) VALUES (?, ?, ?");
+    $query = $connection->prepare("INSERT INTO klachten (klant_id, titel_klacht, bericht) VALUES (?, ?, ?)");
     
     // Bind parameters
     $query->bind_param("iss", $klant_id, $titel_klacht, $klacht);
