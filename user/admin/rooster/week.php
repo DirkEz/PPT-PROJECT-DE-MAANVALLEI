@@ -1,4 +1,6 @@
 <?php 
+session_start();
+session_id();
 include_once '../../config/config.php';
 $week = $_GET['week'];
 $stmt = $connect->prepare("SELECT wr.*, w.voornaam, w.achternaam FROM werknemers_rooster wr JOIN werknemers w ON wr.werknemer_id = w.id WHERE wr.week = '$week'");
@@ -10,6 +12,7 @@ $roosterData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="https://kit.fontawesome.com/b72f5a32f8.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rooster</title>
@@ -17,6 +20,7 @@ $roosterData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     </head>
 <body>
+    <a class="back_button" href="./week_select.php">Terug</a>
     <div class="d-flex weekdagen justify-content-center">
 
         <?php 
@@ -31,11 +35,18 @@ $roosterData = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="d-flex title justify-content-center"><?php echo $days[$i - 1]; ?></div>
             </div>
             <div class="container itemsbox">
+                <?php if ($_SESSION['admin-id'] == 2) { ?> <a href=""><Button>rooster toevoegen</Button></a><?php }?>
+                
                 <?php if (!empty($currentDayData)) {
-                    foreach ($currentDayData as $row) {
+                    foreach ($currentDayData as $row) { 
+
+                        $begin_tijd = substr($row['begin_tijd'], 0, -3); // Remove last 3 characters ":00"
+                        $eind_tijd = substr($row['eind_tijd'], 0, -3); // Remove last 3 characters ":00"
+
                         ?><div class="item mt-1 w-90 bg-info">
-                            
-                            <?=  $row['id'] ;?> </div> <?php 
+                            <div class="naam"> <?=  $row['voornaam'] ?> </div>
+                            <div class="tijd"><?= "\n" . $begin_tijd . " - " . $eind_tijd;?></div> 
+                            </div> <?php 
                     }
                 } else { 
 
