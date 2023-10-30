@@ -1,7 +1,7 @@
 <?php 
 
 include_once "../../layout/session.php";
-
+// echo $_SESSION['positie_id'];
 if ($_SESSION['positie_id'] != 1) {
     header('../login.php');
 }
@@ -17,7 +17,7 @@ if ($_SESSION['positie_id'] != 1) {
 </head>
 <body>
     Medewerker
-    <a href="rooster\week.php">Bekijk het rooster</a>
+    <a href="rooster\week_select.php">Bekijk het rooster</a>
 
     <a href="../logout.php">Uitloggen</a>
 </body>
