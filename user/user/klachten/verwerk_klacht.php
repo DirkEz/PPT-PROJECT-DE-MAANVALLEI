@@ -2,7 +2,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $klant_id = $_POST["klant_id"];
     $titel_klacht = $_POST["titel_klacht"];
-    $bericht = $_POST["bericht"];
+    $klacht = $_POST["klacht"];
 
     // Maak een databaseverbinding
     $connection = new mysqli("localhost", "gebruikersnaam", "wachtwoord", "databasenaam");
@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Voer de klacht in de database in
-    $query = "INSERT INTO klachten (klant_id, titel_klacht, bericht) VALUES ('$klant_id', '$titel_klacht', '$bericht')";
+    $query = "INSERT INTO klachten (klant_id, titel_klacht, klacht) VALUES ('$klant_id', '$titel_klacht', '$klacht')";
 
     if ($connection->query($query) === TRUE) {
         echo "Klacht is succesvol ingediend.";
