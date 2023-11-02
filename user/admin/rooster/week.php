@@ -3,6 +3,7 @@ session_start();
 session_id();
 include_once '../../config/config.php';
 $week = $_GET['week'];
+// $_GET['terug'] = $_GET['week'];
 $stmt = $connect->prepare("SELECT wr.*, w.voornaam, w.achternaam FROM werknemers_rooster wr JOIN werknemers w ON wr.werknemer_id = w.id WHERE wr.week = '$week'");
 $stmt->execute();
 $roosterData = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -21,8 +22,10 @@ $roosterData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </head>
 <body>
     <a class="back_button" href="./week_select.php">Terug</a>
+    <?php if ($_SESSION['admin-id'] == 2) { ?> <a href="rooster_add.php"><Button id="toevoegen">rooster toevoegen</Button></a><?php }?>   
     <div class="d-flex weekdagen justify-content-center">
 
+    
         <?php 
         $days = ['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag', 'Zondag'];
         for ($i = 1; $i <= 7; $i++) {
@@ -31,11 +34,15 @@ $roosterData = $stmt->fetchAll(PDO::FETCH_ASSOC);
             });
         ?>
         <div class="weekdag">
+ 
             <div class="container titlebox">
-                <div class="d-flex title justify-content-center"><?php echo $days[$i - 1]; ?></div>
+           
+                <div class="d-flex title justify-content-center">
+               
+                <?php echo $days[$i - 1]; ?></div>
             </div>
             <div class="container itemsbox">
-                <?php if ($_SESSION['admin-id'] == 2) { ?> <a href=""><Button>rooster toevoegen</Button></a><?php }?>
+                
                 
                 <?php if (!empty($currentDayData)) {
                     foreach ($currentDayData as $row) { 
