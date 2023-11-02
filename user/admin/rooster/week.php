@@ -22,7 +22,7 @@ $roosterData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </head>
 <body>
     <a class="back_button" href="./week_select.php">Terug</a>
-    <?php if ($_SESSION['admin-id'] == 2) { ?> <a href="rooster_add.php"><Button id="toevoegen">rooster toevoegen</Button></a><?php }?>   
+    <?php if ($_SESSION['admin_id'] == 2) { ?> <a href="rooster_add.php"><Button id="toevoegen">rooster toevoegen</Button></a><?php }?>   
     <div class="d-flex weekdagen justify-content-center">
 
     
