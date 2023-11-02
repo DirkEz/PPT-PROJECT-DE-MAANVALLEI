@@ -36,7 +36,7 @@ $desiredId = 1;
                         </option>
                     <?php } ?>
                 </select>
-                <input type="submit" value="sd">
+                <input type="submit" value="Submit">
 
 
 
