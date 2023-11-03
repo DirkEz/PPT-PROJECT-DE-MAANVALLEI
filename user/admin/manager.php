@@ -21,6 +21,7 @@ if (!isset($_SESSION['loggedin'])) {
 </head>
 <body>
     Manager
+    <a href="rooster\week_select.php">Bekijk het rooster</a>
     <a href="../logout.php">Uitloggen</a>
 </body>
 </html>
