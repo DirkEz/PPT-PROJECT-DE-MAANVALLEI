@@ -1,15 +1,24 @@
 <?php
-session_start();
-// Change this to your connection info.
-$DATABASE_HOST = 'localhost';
-$DATABASE_USER = 'root';
-$DATABASE_PASS = '';
-$DATABASE_NAME = 'ppt_maasvallei';
-// Try and connect using the info above.
-$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-if ( !mysqli_connect_errno() ) {
-	// If there is an error with the connection, stop the script and display the error.
-	// echo "Database werkt";
-} else {
-    exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+// /** @var PDO $connect */
+$host = 'localhost';
+$db = 'ppt_maasvallei';
+$user = 'root';
+$pass = '';
+$charset = 'utf8mb4';
+
+$dns = "mysql:host=$host;dbname=$db;charset=$charset";
+$opt = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES => false,
+];
+
+try {
+    $connect = new PDO($dns, $user, $pass, $opt);
+    // echo "connected";
+} 
+catch (PDOException $e)
+{
+    echo $e->getMessage();
+    die("sorry de database wilt niet, neem contact op!");
 }

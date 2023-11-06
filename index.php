@@ -36,7 +36,6 @@
     <nav>
         <a href="user/login.php">Login</a>
         <a href="user/register.php">Register</a>
-        <a href="userpage.php">User Page</a>
         <a href="user/user/klachten/klacht_formulier.php">Klachten</a>
     </nav>
 </body>

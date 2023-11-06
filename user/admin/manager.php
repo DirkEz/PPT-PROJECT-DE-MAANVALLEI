@@ -2,12 +2,9 @@
 
 include_once "../../layout/session.php";
 
-if (!isset($_SESSION['loggedin'])) {
+if ($_SESSION['loggedin'] == TRUE) {
     if ($_SESSION['positie_id'] != 2) {
-        header('../login.php');
-        exit;
-    } else {
-        echo "hoi!";
+        header('location:../login.php');
     }
 }
 ?>
@@ -21,6 +18,8 @@ if (!isset($_SESSION['loggedin'])) {
 </head>
 <body>
     Manager
+    <a href="rooster\week_select.php">Bekijk het rooster</a>
     <a href="../logout.php">Uitloggen</a>
+    <a href="/Maasvallei/PPT-PROJECT-DE-MAANVALLEI/user/admin/management\beheer_werknemer.php">Werknemers beheren</a>
 </body>
 </html>

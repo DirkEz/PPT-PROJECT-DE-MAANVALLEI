@@ -1,11 +1,11 @@
 <?php 
 
 include_once "../../layout/session.php";
-
-if ($_SESSION['positie_id'] != 1) {
-    header('../login.php');
-}
-
+if ($_SESSION['loggedin'] == TRUE) {
+    if ($_SESSION['positie_id'] != 1) {
+        header('location:../login.php');
+    }
+}else header('location:../login.php');
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,8 @@ if ($_SESSION['positie_id'] != 1) {
 </head>
 <body>
     Medewerker
-    <a href="rooster\week.php">Bekijk het rooster</a>
+    kindje
+    <a href="rooster\week_select.php">Bekijk het rooster</a>
 
     <a href="../logout.php">Uitloggen</a>
 </body>
