@@ -1,29 +1,3 @@
-<?php
-    // Controleer of het formulier is ingediend
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Verkrijg de waarden van het formulier
-        $klant_id = $_POST["klant_id"];
-        $titel_klacht = $_POST["titel_klacht"];
-        $bericht = $_POST["bericht"];
-
-        // Valideer de invoer
-        if (empty($klant_id) || empty($titel_klacht) || empty($bericht)) {
-            echo "Vul alstublieft alle velden in.";
-        } else {
-            $sql = "INSERT INTO klachten (klant_id, titel_klacht, bericht, verwerkt)
-            VALUES (:klant_id,:titel_klacht,:bericht,:verwerkt)";
-
-            // Voorbeeld: Toon de ingediende gegevens
-            // echo "Klant ID: " . $klant_id . "<br>";
-            // echo "Titel Klacht: " . $titel_klacht . "<br>";
-            // echo "Klacht: " . $bericht . "<br>";
-
-            // Reset de waarden na het indienen van het formulier
-            $klant_id = $titel_klacht = $bericht = "";
-        }
-    }
-?>
-
 <!DOCTYPE html>
 <html>
 <head>

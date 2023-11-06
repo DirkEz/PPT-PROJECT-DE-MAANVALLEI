@@ -18,7 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Use prepared statements to insert data
-    $query = $connection->prepare("INSERT INTO klachten (klant_id, titel_klacht, klacht) VALUES (?, ?, ?");
+    $query = $connection->prepare("INSERT INTO klachten (klant_id, titel_klacht, bericht, verwerkt) VALUES (?, ?, ?, ?)");
+
+
     
     // Bind parameters
     $query->bind_param("iss", $klant_id, $titel_klacht, $klacht);
