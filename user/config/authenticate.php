@@ -18,39 +18,54 @@ if (isset($_POST['email'], $_POST['password'])) {
     $stmt->bindParam(':email', $email);
     $stmt->execute();
 
-    if ($stmt->rowCount() > 0) {
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $id = $row['id'];
-        $password_hashed = $row['wachtwoord'];
-
-        if (password_verify($password, $password_hashed)) {
+if ($stmt = $con->prepare("SELECT id, wachtwoord FROM accounts WHERE email = ?")) {
+    
+	$stmt->bind_param('s', $_POST['email']);
+	$stmt->execute();
+	$stmt->store_result();
+    debug_to_console("2");
+    
+    if ($stmt->num_rows > 0) {
+        
+        $stmt->bind_result($id, $password_hashed);
+        $stmt->fetch();
+        
+        $password = password_verify($_POST['password'], $password_hashed);
+        
+        if ($password === true ) {
+            // debug_to_console("3");
             session_regenerate_id();
-            $_SESSION['loggedin'] = TRUE;
-            $_SESSION['name'] = $email;
+
+            $_SESSION['name'] = $_POST['email'];
             $_SESSION['id'] = $id;
 
             $stmt2 = $connect->prepare("SELECT id, positie_id FROM werknemers WHERE account_id = :id");
             $stmt2->bindParam(':id', $id);
             $stmt2->execute();
-            $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-            $wid = $row2['id'];
-            $positie_id = $row2['positie_id'];
-            $_SESSION['admin_id'] = $positie_id;
-            echo $_SESSION['admin_id'];
-            if ($positie_id === 2) {
+	        $stmt2->store_result();
+            $stmt2->bind_result($wid, $positie_id);
+            $stmt2->fetch();
+            
+            $_SESSION['positie_id'] = $positie_id;
+            if ($_SESSION['positie_id'] === 2){
+                $_SESSION['loggedin'] = TRUE;
+
                 echo 'Welcome ' . $_SESSION['name'] . '!';
                 debug_to_console("id: " . $id . " TRUE");
                 header('Location: ../admin/manager.php');
-            } elseif ($positie_id === 1) {
+            } elseif ($_SESSION['positie_id'] === 1){
+                $_SESSION['loggedin'] = TRUE;
                 echo 'Welcome ' . $_SESSION['name'] . '!';
                 debug_to_console("id: " . $id . " TRUE");
                 header('Location: ../admin/medewerker.php');
             } else {
+                $_SESSION['loggedin'] = TRUE;
                 echo 'Welcome ' . $_SESSION['name'] . '!';
                 header('Location: ../user/user.php');
             }
         } else {
             echo 'Incorrect username and/or password!';
+
         }
     } else {
         echo 'Incorrect username and/or password!';
