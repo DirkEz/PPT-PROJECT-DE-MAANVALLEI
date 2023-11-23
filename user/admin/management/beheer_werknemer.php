@@ -1,7 +1,7 @@
 <?php 
 
 
-include_once "../../user-creation/config/config.php";
+include_once "../../config/config.php";
 include_once "../../../layout/session.php";
 
 if ($_SESSION['loggedin'] == TRUE) {

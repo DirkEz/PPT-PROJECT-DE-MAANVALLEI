@@ -17,55 +17,48 @@ if (isset($_POST['email'], $_POST['password'])) {
     $stmt = $connect->prepare("SELECT id, wachtwoord FROM accounts WHERE email = :email");
     $stmt->bindParam(':email', $email);
     $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($stmt = $con->prepare("SELECT id, wachtwoord FROM accounts WHERE email = ?")) {
-    
-	$stmt->bind_param('s', $_POST['email']);
-	$stmt->execute();
-	$stmt->store_result();
-    debug_to_console("2");
-    
-    if ($stmt->num_rows > 0) {
-        
-        $stmt->bind_result($id, $password_hashed);
-        $stmt->fetch();
-        
-        $password = password_verify($_POST['password'], $password_hashed);
-        
-        if ($password === true ) {
-            // debug_to_console("3");
+    if ($result) {
+        $id = $result['id'];
+        $password_hashed = $result['wachtwoord'];
+
+        if (password_verify($password, $password_hashed)) {
             session_regenerate_id();
 
-            $_SESSION['name'] = $_POST['email'];
+            $_SESSION['name'] = $email;
             $_SESSION['id'] = $id;
 
             $stmt2 = $connect->prepare("SELECT id, positie_id FROM werknemers WHERE account_id = :id");
             $stmt2->bindParam(':id', $id);
             $stmt2->execute();
-	        $stmt2->store_result();
-            $stmt2->bind_result($wid, $positie_id);
-            $stmt2->fetch();
-            
-            $_SESSION['positie_id'] = $positie_id;
-            if ($_SESSION['positie_id'] === 2){
-                $_SESSION['loggedin'] = TRUE;
+            $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-                echo 'Welcome ' . $_SESSION['name'] . '!';
-                debug_to_console("id: " . $id . " TRUE");
-                header('Location: ../admin/manager.php');
-            } elseif ($_SESSION['positie_id'] === 1){
-                $_SESSION['loggedin'] = TRUE;
-                echo 'Welcome ' . $_SESSION['name'] . '!';
-                debug_to_console("id: " . $id . " TRUE");
-                header('Location: ../admin/medewerker.php');
-            } else {
-                $_SESSION['loggedin'] = TRUE;
-                echo 'Welcome ' . $_SESSION['name'] . '!';
-                header('Location: ../user/user.php');
+            if ($result2) {
+                $positie_id = $result2['positie_id'];
+                $_SESSION['positie_id'] = $positie_id;
+
+                if ($positie_id === 2) {
+                    $_SESSION['loggedin'] = true;
+                    echo 'Welcome ' . $_SESSION['name'] . '!';
+                    debug_to_console("id: " . $id . " TRUE");
+                    header('Location: ../admin/manager.php');
+                    exit;
+                } elseif ($positie_id === 1) {
+                    $_SESSION['loggedin'] = true;
+                    echo 'Welcome ' . $_SESSION['name'] . '!';
+                    debug_to_console("id: " . $id . " TRUE");
+                    header('Location: ../admin/medewerker.php');
+                    exit;
+                } else {
+                    $_SESSION['loggedin'] = true;
+                    echo 'Welcome ' . $_SESSION['name'] . '!';
+                    header('Location: ../user/user.php');
+                    exit;
+                }
             }
         } else {
             echo 'Incorrect username and/or password!';
-
         }
     } else {
         echo 'Incorrect username and/or password!';

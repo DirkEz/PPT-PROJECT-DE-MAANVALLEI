@@ -22,7 +22,7 @@ $roosterData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </head>
 <body>
     <a class="back_button" href="./week_select.php">Terug</a>
-    <?php if ($_SESSION['admin_id'] == 2) { ?> <a href="rooster_add.php"><Button id="toevoegen">rooster toevoegen</Button></a><?php }?>   
+    <?php if ($_SESSION['positie_id'] == 2) { ?> <a href="rooster_add.php"><Button id="toevoegen">rooster toevoegen</Button></a><?php }?>   
     <div class="d-flex weekdagen justify-content-center">
 
     
@@ -49,11 +49,15 @@ $roosterData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         $begin_tijd = substr($row['begin_tijd'], 0, -3); // Remove last 3 characters ":00"
                         $eind_tijd = substr($row['eind_tijd'], 0, -3); // Remove last 3 characters ":00"
-
-                        ?><div class="item mt-1 w-90 bg-info">
+                        $item_id = $row['id'];
+                        ?>
+                        <div class="item mt-1 w-90 bg-info">
                             <div class="naam"> <?=  $row['voornaam'] ?> </div>
-                            <div class="tijd"><?= "\n" . $begin_tijd . " - " . $eind_tijd;?></div> 
-                            </div> <?php 
+                            <div class="tijd"><?= "\n" . $begin_tijd . " - " . $eind_tijd;?></div>
+                            <div class="vw-button"><?php if ($_SESSION['positie_id'] == 2) {
+                                 ?> <a href="rooster_delete.php?id=<?= $item_id ?>&week=<?= $_GET['week'] ?>">Verwijderen</a><?php } ?></div>    
+                        </div> <?php 
+                             
                     }
                 } else { 
 

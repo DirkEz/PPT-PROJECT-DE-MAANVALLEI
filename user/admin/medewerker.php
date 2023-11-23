@@ -17,7 +17,6 @@ if ($_SESSION['loggedin'] == TRUE) {
 </head>
 <body>
     Medewerker
-    kindje
     <a href="rooster\week_select.php">Bekijk het rooster</a>
 
     <a href="../logout.php">Uitloggen</a>

@@ -15,7 +15,7 @@ $desiredId = 1;
     <title>Document</title>
 </head>
 <body>
-    <?php if ($_SESSION['admin_id'] == 2) {?>
+    <?php if ($_SESSION['positie_id'] == 2) {?>
         <a class="back_button" href="../manager.php">Terug</a>
         
         <?php } else { ?> 

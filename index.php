@@ -6,10 +6,30 @@
     <title>Home</title>
 </head>
 <body>
-<<<<<<< Updated upstream
-<a href="user\login.php">login</a>
-    <a href="user\register.php">register</a>
-=======
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: teal;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        nav {
+            background-color: #444;
+            text-align: center;
+            padding: 10px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
     <header>
         <h1>Maasvallei</h1>
     </header>
@@ -19,6 +39,5 @@
         <!-- <a href="userpage.php">User Page</a> -->
         <a href="user/user/klachten/klacht_formulier.php">Klachten</a>
     </nav>
->>>>>>> Stashed changes
 </body>
 </html>

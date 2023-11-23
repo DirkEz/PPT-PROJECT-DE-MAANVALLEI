@@ -2,9 +2,6 @@
 
 include_once "../../../user-creation/config/config.php";
 
-
-
-
 // Insert werknemer
 if(isset($_POST['submit_add'])) {
     $account_id = $_POST['account_id'];
@@ -27,7 +24,7 @@ if(isset($_POST['submit_add'])) {
     }else header('Location: ../beheer_werknemer.php');
 } else
 
-    //Delete werknemer
+//Delete werknemer
 if(isset($_POST['submit_delete'])) {
     $sql = "DELETE FROM werknemers WHERE id = :id";
     $stmt = $connect->prepare($sql);
