@@ -19,7 +19,8 @@ if ($_SESSION['loggedin'] == TRUE) {
 <body>
     Manager
     <a href="./rooster\week_select.php">Bekijk het rooster</a>
-    <a href="../logout.php">Uitloggen</a>
     <a href="./management\beheer_werknemer.php">Werknemers beheren</a>
+    <a href="kampeerplaatsen_inzien.php">Kampeerplaatsen inzien</a>
+    <a href="../logout.php">Uitloggen</a>
 </body>
 </html>
